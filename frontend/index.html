@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ServiceFlow | AWS Service Management</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">S</div>
+
+            <div>
+                <h2>ServiceFlow</h2>
+                <span>AWS Service Management</span>
+            </div>
+        </div>
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-item active">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>◉</span>
+                Tickets
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>✓</span>
+                Resolved
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="aws-status">
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>System Online</strong>
+                    <small>AWS Backend Connected</small>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Main Application -->
+    <div class="app">
+
+        <!-- Top Bar -->
+        <header class="topbar">
+
+            <div>
+                <p class="eyebrow">SERVICE MANAGEMENT</p>
+                <h1>Dashboard</h1>
+            </div>
+
+            <div class="topbar-actions">
+
+                <div class="api-status">
+                    <span class="status-dot"></span>
+                    API Connected
+                </div>
+
+                <button id="addTicketBtn" class="primary-btn">
+                    <span>+</span>
+                    New Ticket
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- Dashboard Content -->
+        <main class="content">
+
+            <!-- Welcome -->
+            <section class="welcome">
+
+                <div>
+                    <h2>Service Overview</h2>
+                    <p>Monitor and manage your service requests from one place.</p>
+                </div>
+
+            </section>
+
+
+            <!-- Statistics -->
+            <section class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-header">
+                        <span>Total Tickets</span>
+                        <div class="stat-icon blue">T</div>
+                    </div>
+
+                    <div class="stat-value" id="totalTickets">0</div>
+
+                    <p class="stat-description">
+                        All service requests
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-header">
+                        <span>Open</span>
+                        <div class="stat-icon orange">O</div>
+                    </div>
+
+                    <div class="stat-value" id="openTickets">0</div>
+
+                    <p class="stat-description">
+                        Awaiting attention
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-header">
+                        <span>In Progress</span>
+                        <div class="stat-icon purple">P</div>
+                    </div>
+
+                    <div class="stat-value" id="inProgressTickets">0</div>
+
+                    <p class="stat-description">
+                        Currently being handled
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-header">
+                        <span>Critical</span>
+                        <div class="stat-icon red">!</div>
+                    </div>
+
+                    <div class="stat-value" id="criticalTickets">0</div>
+
+                    <p class="stat-description">
+                        Requires immediate action
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- Tickets Section -->
+            <section class="tickets-section">
+
+                <div class="section-header">
+
+                    <div>
+                        <p class="section-label">TICKET MANAGEMENT</p>
+                        <h2>Recent Service Tickets</h2>
+                    </div>
+
+                    <div class="ticket-actions">
+
+                        <select id="statusFilter">
+                            <option value="ALL">All Status</option>
+                            <option value="OPEN">Open</option>
+                            <option value="IN PROGRESS">In Progress</option>
+                            <option value="RESOLVED">Resolved</option>
+                        </select>
+
+                        <button id="refreshBtn" class="secondary-btn">
+                            ↻ Refresh
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Ticket Container -->
+                <div id="ticketContainer" class="ticket-container">
+
+                    <div class="loading-state">
+                        <div class="loader"></div>
+                        <p>Loading service tickets...</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- Add Ticket Modal -->
+    <div id="ticketModal" class="modal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+                    <p class="section-label">SERVICE REQUEST</p>
+                    <h2>Create New Ticket</h2>
+                </div>
+
+                <button id="closeModalBtn" class="close-btn">
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="ticketForm">
+
+                <div class="form-group">
+
+                    <label for="ticketTitle">
+                        Ticket Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="ticketTitle"
+                        placeholder="e.g. Production server unavailable"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="ticketPriority">
+                            Priority
+                        </label>
+
+                        <select id="ticketPriority" required>
+                            <option value="LOW">Low</option>
+                            <option value="NORMAL" selected>Normal</option>
+                            <option value="HIGH">High</option>
+                            <option value="CRITICAL">Critical</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="ticketStatus">
+                            Status
+                        </label>
+
+                        <select id="ticketStatus" required>
+                            <option value="OPEN" selected>Open</option>
+                            <option value="IN PROGRESS">In Progress</option>
+                            <option value="RESOLVED">Resolved</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="ticketDescription">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="ticketDescription"
+                        rows="5"
+                        placeholder="Describe the issue or service request..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        id="cancelTicketBtn"
+                        class="secondary-btn"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Create Ticket
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
