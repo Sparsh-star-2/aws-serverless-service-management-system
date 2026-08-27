@@ -474,7 +474,7 @@ Through this project, I gained practical experience with:
 * Managing IAM permissions
 * Implementing SNS email notifications
 * Using CloudWatch for logging and monitoring
-* Connecting a frontend application with AWS backend services
+* Connecting a frontend application with AWS backend services 
 
 ---
 
