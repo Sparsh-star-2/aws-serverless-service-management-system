@@ -110,9 +110,6 @@ The main application request flow is:
                  │ Logs & Monitoring  │
                  └────────────────────┘
 ```
-
-> Architecture diagram will be added here.
-
 ---
 
 ## ✨ Key Features
