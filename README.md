@@ -313,28 +313,30 @@ This provides visibility into backend execution and helps identify problems duri
 
 ```text
 
-    aws-serverless-service-management-system
-    │
-    ├── architecture/
-    │   └── architecture.png
-    │
-    ├── backend/
-    │   └── lambda_function.py
-    │
-    ├── frontend/
-    │   ├── index.html
-    │   ├── style.css
-    │   └── script.js
-    │
-    ├── screenshots/
-    │   ├── api-gateway-success.png
-    │   ├── rds-database.png
-    │   ├── lambda.png
-    │   ├── sns-topic.png
-    │   ├── email-notification.png
-    │   └── cloudwatch-logs.png
-    │
-    └── README.md
+aws-serverless-service-management-system/
+│
+├── architecture/
+│   └── architecture.png
+│
+├── backend/
+│   └── lambda_function.py
+│
+├── frontend/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+│
+├── screenshots/
+│   ├── api-gateway-success.png
+│   ├── rds-database.png
+│   ├── lambda.png
+│   ├── sns-topic.png
+│   ├── email-notification.png
+│   └── cloudwatch-logs.png
+│
+├── DEMO.mp4
+│
+└── README.md
 ```
 
 ---
